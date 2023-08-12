@@ -1,0 +1,35 @@
+State Setting 
+
+{
+    state: "Play|Win|Draw"
+    arrButtonStatus: array of 9 buttons status ("", "cross" or "circle")
+    currentIcon: ("cross"|"circle")
+    winLine:(Vertical|Horizontal|SlashDiagonal|BackSlashDiagonal)
+    winVerticalPosition:0
+    winHorizontalPosition:0
+}
+
+
+State "Start" 
+ - run functon "setup"
+
+
+State "Play"
+ - 1. Waiting for one of the events: 
+    a. Button click from gamer then run function "CheckWin"
+    b. "Reset" button click then run function "Setup"
+
+State "Win" or "Draw"
+Wait for event "Reset" button click then run function "Setup"
+
+
+
+Functions:
+
+1. Setup - initialize state setting and change state to "Play"
+
+2. CheckWin -
+    update icon array and check if the gamer win based on icon array
+    2a. If the gamer win then change state to "Win"
+    2b. Else If the all icons are clicked then change state to "Draw"
+    2c. Else change gamer's role (from "cross" to "circle or vice versa) and keep state to "Play"
